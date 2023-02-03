@@ -8,7 +8,8 @@ const {DB_PORT, DB_NAME, DB_USERNAME, DB_HOST, DB_PASSWORD, DB_DIALECT} = proces
 const dbInstance = new Sequelize(DB_NAME, DB_USERNAME, DB_PASSWORD, {
     'host': DB_HOST,
     'dialect': DB_DIALECT,
-    'port': DB_PORT
+    'port': DB_PORT,
+    'logging': false
 });
  
 // console.log(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, process.env.DB_HOST, process.env.DB_PORT);

@@ -1,40 +1,18 @@
 import express from "express";
 import {index} from '../controllers/index.js';
-
-//models
-import School from "../models/Schools.js";
-import Users from "../models/Users.js";
+import {addNewUser, fetchUsers} from '../controllers/UserController.js';
+import {addSchool, fetchSchools} from '../controllers/SchoolsController.js';
 
 const router = express.Router();
 
 router.get('/', index);
 
-router.post('/schools', async (req, res) => {
-    const {title, location, author} = req.body;
+router.post('/schools', addSchool);
 
-    const newSchool = {title, location, author};
+router.get('/schools', fetchSchools);
 
-    try {
-        const add = await School.create(newSchool);
+router.get('/users', fetchUsers);
 
-        res.status(200).send({message: 'School added successfully'});
-    }catch(error) {
-
-        res.status(500).send({message: `School not added:  ${error}`});
-    }
-});
-
-router.get('/schools', async (req, res) => {
-
-    try {
-        const records = await School.findAll();
-
-        res.status(200).send(records);
-    }catch (error){
-        res.status(400).send({ message: `No records found.`});
-    }
-
-    res.send({message: 'Schools list'});
-});
+router.post('/users', addNewUser);
 
 export default router;
